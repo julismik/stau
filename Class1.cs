@@ -22,8 +22,8 @@ namespace stau
         {
             PositionX = Zeichenflachei.ActualWidth * rnd.NextDouble();
             PositionY = Zeichenflachei.ActualHeight * rnd.NextDouble();
-            GeschwindigkeitX = 280 + 40 * rnd.NextDouble();
-            GeschwindigkeitY = 280 + 40 * rnd.NextDouble();
+            GeschwindigkeitX = 8 + 40 * rnd.NextDouble();
+            GeschwindigkeitY = 8 + 40 * rnd.NextDouble();
 
 
         }

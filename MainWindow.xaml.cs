@@ -39,6 +39,8 @@ namespace stau
 
         private void animiere(object sender, EventArgs e)
         {
+           Zeichenflache.Children.RemoveRange(0, autos.Length);
+            // die gleiceh wie Zeichenflache.Children.Clear();
            foreach(Auto item in autos)
             {
                 item.Bewegen(timer.Interval);
