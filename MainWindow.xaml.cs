@@ -22,16 +22,19 @@ namespace stau
     public partial class MainWindow : Window
     {
         DispatcherTimer timer = new DispatcherTimer();
-        Auto[] autos = new Auto[3];
+        List <Auto> autos = new List<Auto> ();
+
+        //Auto[] autos = new Auto[3];
         public MainWindow()
         {
             InitializeComponent();
             timer.Interval = TimeSpan.FromMilliseconds(17);
             timer.Start();
             timer.Tick += animiere;
-            for ( int i = 0; i < 3; i++)
+            for ( int i = 0; i < 10; i++)
             {
-                autos[i] = new Auto(Zeichenflache);
+                autos.Add(new Auto(Zeichenflache));
+               //autos[i] = new Auto(Zeichenflache);
             }
 
             
@@ -39,12 +42,23 @@ namespace stau
 
         private void animiere(object sender, EventArgs e)
         {
-           Zeichenflache.Children.RemoveRange(0, autos.Length);
-            // die gleiceh wie Zeichenflache.Children.Clear();
+           Zeichenflache.Children.Clear();
            foreach(Auto item in autos)
             {
-                item.Bewegen(timer.Interval);
+                item.Bewegen(timer.Interval, Zeichenflache);
                 item.Zeichne(Zeichenflache);
+            }
+
+        }
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Up )
+            {
+                autos.ForEach(x => x.Beschleunigung(180));
+            }
+            if (e.Key == Key.Down)
+            {
+                autos.ForEach(x => x.Beschleunigung(-180));
             }
         }
 

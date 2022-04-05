@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:stau"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Canvas x:Name="Zeichenflache">
+        Title="MainWindow" Height="570" Width="800">
+    <Canvas x:Name="Zeichenflache" Width="800" Height="570">
         
     </Canvas>
 </Window>

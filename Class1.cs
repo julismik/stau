@@ -16,14 +16,17 @@ namespace stau
         public double GeschwindigkeitX { get; private set; }
         public double GeschwindigkeitY { get; private set; }
         private static Random rnd = new Random();
+        public double Radius { get; private set; }
+        public double Winkel { get; private set; }
+        public double Winkelgeschwindigkeit { get; private set; }
 
         // Konstruktor 
-        public Auto(Canvas Zeichenflachei)
+        public Auto(Canvas Zeichenflache)
         {
-            PositionX = Zeichenflachei.ActualWidth * rnd.NextDouble();
-            PositionY = Zeichenflachei.ActualHeight * rnd.NextDouble();
-            GeschwindigkeitX = 8 + 40 * rnd.NextDouble();
-            GeschwindigkeitY = 8 + 40 * rnd.NextDouble();
+            PositionX = rnd.Next(0, Convert.ToInt32(Zeichenflache.Width));
+            PositionY = rnd.Next(0, Convert.ToInt32(Zeichenflache.Height));
+            GeschwindigkeitX = (400 * rnd.NextDouble() + 800) * rnd.Next(-1,2);
+            GeschwindigkeitY = (800 + 400 * rnd.NextDouble()) * rnd.Next(-1,2);
 
 
         }
@@ -39,12 +42,35 @@ namespace stau
 
             Zeichenflache.Children.Add(e);
         }
-        public void Bewegen(TimeSpan interval)
+        public void Bewegen(TimeSpan interval, Canvas Zeichenflache)
         {
-            PositionX += GeschwindigkeitX * interval.TotalSeconds;
-            PositionY += GeschwindigkeitY * interval.TotalSeconds;
+            PositionX += GeschwindigkeitX * interval.TotalMinutes;
+            PositionY += GeschwindigkeitY * interval.TotalMinutes;
+            if (PositionX > Zeichenflache.ActualWidth)
+            {
+
+                PositionX = Zeichenflache.ActualWidth;
+            }
+            else if (PositionX < 0)
+            {
+                PositionX = Zeichenflache.ActualWidth;
+            }
+            else if (PositionY > Zeichenflache.ActualHeight)
+            {
+                PositionY = 0;
+            }
+            else if(PositionY < 0)
+            {
+                PositionY = Zeichenflache.ActualHeight;
+            }
 
 
+
+        }
+        public void Beschleunigung (double beschleunigung)
+        {
+            PositionX += GeschwindigkeitX + beschleunigung;
+            PositionY += GeschwindigkeitY + beschleunigung ;
         }
     
     }
